@@ -32,8 +32,13 @@ public class FigureInWords {
 		int tens_ones = (three_digits % 100); // Store tens and ones value from remainder of division by 100
 		
 		// Get hundreds word from arrays
-		if(hundreds != 0){
-			hundred_words = one_to_twenty[hundreds] + " " + large[1] + " and ";
+		if(hundreds != 0) {
+			if (tens_ones != 0) {
+				hundred_words = one_to_twenty[hundreds] + " " + large[1] + " and ";
+			}
+			else {
+				hundred_words = one_to_twenty[hundreds] + " " + large[1] + " ";
+			}	
 		}
 
 		// Get tens-ones word from array for numbers less than 20
@@ -46,8 +51,16 @@ public class FigureInWords {
 		else if ((tens_ones != 0) && (tens_ones >= 20)) {
 			int ten = (three_digits - (hundreds * 100)) / 10;
 			int one = tens_ones % 10;
-			tens_ones_words = tens[ten] + "-" + one_to_twenty[one] + " ";
+			if (one > 0) {
+				tens_ones_words = tens[ten] + "-" + one_to_twenty[one] + " ";
+			}
+			if (one == 0) {
+				tens_ones_words = tens[ten] + " ";
+			}
 			words += hundred_words + tens_ones_words;
+		}
+		else if (tens_ones == 0) {
+			words += hundred_words;
 		}
 		return words;
 	}
@@ -78,18 +91,23 @@ public class FigureInWords {
 
 		for (int i = 0; i < 4; i++) {
 			// Group of 3 must have a value greater than 0
+
 			if (re_arranged[i] > 0) {
-				// Skip 'hundred' since we already put it	 
+				// Skip 'hundred' since we already put it	
 				if (i != 3) {
-					groups_of_three_text[i] = three_to_words(re_arranged[i]) + large[4-i] + ", "; // Add 'thousand', 'million' and 'billion' to each group
+					if(figure % 100 > 0 && figure % 1000 < 100) {
+						groups_of_three_text[i] = three_to_words(re_arranged[i]) + large[4-i] + " and "; 
+					}
+					else {
+						groups_of_three_text[i] = three_to_words(re_arranged[i]) + large[4-i] + " "; // Add 'thousand', 'million' and 'billion' to each group
+					}
 					words = groups_of_three_text[i];
 				}
 				else {
 					groups_of_three_text[i] = three_to_words(re_arranged[i]);
 					words = groups_of_three_text[i];
 				}
-			}
-						
+			}				
 		}
 		System.out.println(words.trim() + ".");
 	}
@@ -101,10 +119,7 @@ public class FigureInWords {
 		String input = in.nextLine();
 
 		// Check whether input is done or a number and do appropriate function
-		if (input.equals( "done" )) {
-			System.out.println("Thank you for using our service.");
-		}
-		else {
+		while (!(input.equals( "done" ))) {
 			try {
 				figure = Integer.parseInt(input);
 				figure_to_words(figure);	
@@ -112,7 +127,11 @@ public class FigureInWords {
 			catch (NumberFormatException e) {
 				System.out.println("You entered a wrong value");
 			}	
-		}	
+			System.out.print("Enter a number to convert to words (or 'done' to quit): ");
+			input = in.nextLine();
+			words = "";
+		}
+		System.out.println("Thank you for using our service.");	
 	}
 }
 
