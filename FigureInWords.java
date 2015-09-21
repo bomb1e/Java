@@ -1,3 +1,7 @@
+/*
+Tabby & Eric
+*/
+
 import java.util.Scanner;
 
 public class FigureInWords {
