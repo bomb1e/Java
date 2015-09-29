@@ -18,16 +18,19 @@ public class BinarySearch {
         int first = 0;
         int last = array.length - 1;
         int mid = (first + last) / 2;
-        
-        if(e > array[mid]){
-        
+        int tries = 0;
+        while(first <= last) {
+            if(e > array[mid]){
+            first = mid + 1;
+            }
+            else if(e < array[mid]){
+                last = mid - 1;
+            }
+            else {return mid;} 
+            mid = (first + last) / 2;
+            tries++;
         }
-        if(e < array[mid]){
-        
-        }
-        if(e == array[mid]){
-        
-        }
+        System.out.println("No. of tries: " + tries);
         return -1;
     }
 }

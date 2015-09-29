@@ -16,11 +16,14 @@ public class LinearSearch {
     
     }
     public static int search(int[] array, int element){
+        int tries = 0;
         for(int i = 0; i<array.length; i++){
             if (array[i]==(element)){
                 return i;
             }
+            tries++;
         }
+         System.out.println("No. of tries: " + tries);
         return ELEMENT_NOT_FOUND;
     }
     public static int search(Object[] array, Object e){
