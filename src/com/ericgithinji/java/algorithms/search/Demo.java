@@ -15,7 +15,8 @@ public class Demo {
         
 //        Object[] demoArray = {1,2,34,5,63,3,"Erico","Whagwan"};
 //        System.out.println("Linear Position is: " + LinearSearch.search(demoArray,"Eric"));
-        System.out.println("Binary Position is: " + BinarySearch.search(integerArray,7)); 
-        System.out.println("Linear Position is: " + LinearSearch.search(integerArray,7)); 
+        System.out.println("Binary Position is: " + BinarySearch.search(integerArray,10)); 
+        System.out.println("Linear Position is: " + LinearSearch.search(integerArray,10)); 
+        System.out.println("Binary Recursive Position is: " + BinarySearch.recSearch(integerArray,11)); 
     }
 }
