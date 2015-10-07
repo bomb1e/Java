@@ -11,6 +11,7 @@ package com.ericgithinji.java.algorithms.sort;
  */
 public class BubbleSort {
     
+    private void BubbleSort(){};
     
     public static int[] sort(int[] array, boolean direction) {
         
