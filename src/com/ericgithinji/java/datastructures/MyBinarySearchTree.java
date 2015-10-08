@@ -8,48 +8,101 @@ package com.ericgithinji.java.datastructures;
 /**
  *
  * @author eric
+ * @param <Value>
  */
-public class MyBinarySearchTree {
-    
-    public class MyBSTNode extends MyBinarySearchTree{
-        int value;
-        MyBSTNode left;
-        MyBSTNode right;
+public class MyBinarySearchTree <Value> {     
+    public Node root;
+    private class Node {
+        public int value;
+        Node left, right;
+        public int N; // Number of trees in subtree
         
-        public MyBSTNode() {
-            this.value = 0;
-        }
-
-        public MyBSTNode(int value) {
+        public Node(int value) {
             this.value = value;
-        }
-
-        public MyBSTNode(int value, MyBSTNode left, MyBSTNode right) {
-            this.value = value;
-            this.left = left;
-            this.right = right;
+            this.left = null;
+            this.right = null;
         }
     }
+    public MyBinarySearchTree() {
+        this.root = null;
+    }
     
+    public void add(int element) {
+        this.root = add(root, element);
+    }
     
-    public void add(int value) {
-        MyBSTNode node = new MyBSTNode();
-        MyBSTNode left = node.left;
-        MyBSTNode right = node.right;
-        if(node.value == 0) {
-            node.value = value;
-            return;
+//    add(E element) -> Adds element to the tree.
+    private Node add(Node node, int element) {
+        
+        if(node == null) {
+            node = new Node(element);
+            node.N++;
+        }  
+        else {
+            if(contains(node, element)) {
+                System.out.println("Duplicate value!");
+            }
+            if(node.value > element) {
+                node.left = add(node.left, element);
+                node.N++;
+            }
+            if(node.value < element) {
+                node.right = add(node.right, element);
+                node.N++;
+            }   
         }
-        if(node.value == value) return;
-        if(value > node.value) {
-            if(node.value == 0) {
-                node.right = new MyBSTNode(value);
-            } else right.add(value);         
+        return(node);
+    }
+//    remove(E element) -> Removes element from the tree.
+//    size() -> Returns the total number of nodes in the tree.
+    public int size() {
+        return size(root);
+    }
+    private int size(Node node) {
+        if(node == null) return 0;
+        return node.N;
+    }
+//    contains(E element) -> Returns true if element is in tree, false otherwise.
+    public boolean contains(int element) {
+        return contains(root, element);
+    }
+    private boolean contains(Node node, int element) {
+        if(node == null) return false;
+        if(node.value == element) {
+            return true;
+        } else {
+            if(node.value > element) {
+                return contains(node.right, element);
+            }
+            else {
+                return contains(node.left, element);
+            }
         }
-        if(value < node.value) {
-            if(node.value == 0) {
-                node.left = new MyBSTNode(value);
-            } else left.add(value);
-        } 
-    }   
+    }
+//    smallest() -> Returns the node that has the smallest value.
+    public int smallest() {
+        return smallest(root);
+    }
+    private int smallest(Node node) {
+        if(node.left == null) return node.value;
+        return smallest(node.left);
+    }
+//    largest() -> Returns the node that has the largest value.
+    public int largest() {
+        return largest(root);
+    }
+    private int largest(Node node) {
+        if(node.right == null) return node.value;
+        return largest(node.right);
+    }
+//    toString() -> Returns a nice String representation of the node values, sorted in ascending order.
+    public void toString(Node node)
+    {
+        if (node != null)
+        {
+            toString(node.left);
+            System.out.print(node.value + " - ");
+            toString(node.right);
+        }
+    }
 }
