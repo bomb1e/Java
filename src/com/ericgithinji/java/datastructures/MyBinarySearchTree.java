@@ -33,14 +33,14 @@ public class MyBinarySearchTree <Value> {
     
 //    add(E element) -> Adds element to the tree.
     private Node add(Node node, int element) {
-        
         if(node == null) {
             node = new Node(element);
             node.N++;
         }  
         else {
             if(contains(node, element)) {
-                System.out.println("Duplicate value!");
+                System.out.println("Duplicate value! -> " + element);
+                return(node);
             }
             if(node.value > element) {
                 node.left = add(node.left, element);
