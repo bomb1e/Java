@@ -9,6 +9,8 @@ package com.ericgithinji.java.datastructures;
  *
  * @author eric
  */
-public class MyLinkedList {
+public class MySinglyLinkedList {
+    MyNode head = new MyNode();
+    int count = 0;
     
 }

@@ -26,20 +26,20 @@ public class MyStack <E> {
         stack[top] = element;
     }
     
-    public void pop() {
+    public E pop() {
         if(isEmpty()) throw new StackException("Empty Stack!"); 
+        Object element = stack[top];
         stack[top] = null;
         top--;
+        return (E) element;
     }
     
     public boolean isEmpty() {
-        if(top  == DEFAULT_TOP) return true;
-        return false;
+        return top  == DEFAULT_TOP;  
     }
     
     public boolean isFull() {
-        if(top == DEFAULT_SIZE - 1) return true;
-        return false;
+        return top == DEFAULT_SIZE - 1;
     }
     
     public E peek() {
