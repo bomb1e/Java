@@ -9,8 +9,51 @@ package com.ericgithinji.java.datastructures;
  *
  * @author eric
  */
-public class MySinglyLinkedList {
-    MyNode head = new MyNode();
-    int count = 0;
+public class MySinglyLinkedList<E> {
+    Node<E> head;
+    Node<E> tail;
+    int size;
+    private class Node<E> {
+        public Node<E> prev;
+        public Node<E> next;
+        E element;
+        public Node() {
+        
+        }
+    } 
+    public MySinglyLinkedList() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
+//    add(int position, E element) -> Inserts element at position.
+    public void add(E element) {
+        add(size, element);
+    }
+    private void add(int position, E element) {
+        if(head == null) {
+            head = new Node<>();
+            head.element = element;
+            tail = head;
+            size++;
+        } else {
+            Node temp = new Node<>();
+            temp.element = element;
+            tail.next = temp;
+            temp.prev = tail;
+            tail = temp;
+            size++;
+        }
+    }
     
+//    insertBefore(E elem1, E elem2) -> Insert elem2 before elem1.
+//    insertAfter(E elem1, E elem2) -> Insert elem2 after elem1.
+//    size() -> Returns the total number of nodes in the list.
+//    contains(E element) -> Returns true if element is in the list, false otherwise.
+//    head() -> Returns the first node in the list.
+//    tail() -> Returns the last node in the list. (We're actually messing around with what tail really should return.)
+//    remove(E element) -> Removes element from the list.
+//    isEmpty() -> Returns true if the list has no elements, false otherwise.
+//    reverse() -> Reverses the array.
+//    toString() -> Returns a nice String representation of the nodes in the list.
 }
