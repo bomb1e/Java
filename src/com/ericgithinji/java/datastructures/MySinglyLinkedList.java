@@ -47,7 +47,9 @@ public class MySinglyLinkedList<E> {
     }
     
 //    insertBefore(E elem1, E elem2) -> Insert elem2 before elem1.
-    
+    public void insertBefore(E node, E element) {
+        
+    }
 //    insertAfter(E elem1, E elem2) -> Insert elem2 after elem1.
 //    size() -> Returns the total number of nodes in the list.
     public int size() {
@@ -63,11 +65,13 @@ public class MySinglyLinkedList<E> {
     }
 //    head() -> Returns the first node in the list.
     public Node head() {
-        return head;
+        if(head.prev == null) return head;
+        head = head.prev;
+        return head();
     }
 //    tail() -> Returns the last node in the list. (We're actually messing around with what tail really should return.)
     public Node tail(Node tail) {
-        while(tail != null) return (tail.next);
+        while(tail != null) return tail(tail.next);
         return tail;
     }
  //    remove(E element) -> Removes element from the list.

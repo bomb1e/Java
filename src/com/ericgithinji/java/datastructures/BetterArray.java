@@ -88,12 +88,16 @@ public class BetterArray {
     }
     
     public int size() {
-        return array.length;
+        int size = 0;
+        for(int i = 0; i < array.length; i++) {
+            if(array[i] > 0) size++;
+        }
+        return size;
     }
     
     public void print() {
         System.out.print("{");
-        for( int element : array ){
+        for( int element : array ) {
             System.out.printf("%s " , element);
         }
         
@@ -112,8 +116,7 @@ public class BetterArray {
             this.array = newArray;
         }
         this.array[size++] = element; 
-    }
-    
+    }   
     public void remove(int index) {
         if(index < 0 || index > size - 1) {
             System.out.println("Index not found!");
